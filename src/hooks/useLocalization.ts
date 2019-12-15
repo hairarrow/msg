@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const MOCK_RESPONSE = {
 	seen_by: {
 		en: "seen by",

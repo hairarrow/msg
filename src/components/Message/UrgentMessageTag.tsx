@@ -1,8 +1,20 @@
 import React, { FC, HTMLProps } from "react";
 import { styled } from "../../theme";
-import { ClockIcon } from "../Icon";
+import ClockIcon from "../Icon/clock.svg";
 
-const Urgent = styled.span`
+export const UrgentStyles = styled.span`
+	display: flex;
+	align-items: center;
+	padding: 2px 8px;
+	border-radius: 24px;
+	text-transform: capitalize;
+	font-weight: 300;
+	font-size: 0.75rem;
+	color: ${({
+		theme: {
+			color: { grayLight }
+		}
+	}) => grayLight};
 	background: ${({
 		theme: {
 			color: { redUrgent }
@@ -10,7 +22,7 @@ const Urgent = styled.span`
 	}) => redUrgent};
 
 	.clock-icon {
-		padding-right: 16px;
+		margin-right: 4px;
 	}
 `;
 
@@ -18,10 +30,15 @@ const UrgentMessageTag: FC<HTMLProps<HTMLSpanElement>> = ({
 	children,
 	className
 }) => (
-	<Urgent className={className}>
-		<ClockIcon className="clock-icon" />
+	<UrgentStyles className={className}>
+		<img
+			className="clock-icon"
+			src={ClockIcon}
+			alt="Urgent Icon"
+			aria-hidden="true"
+		/>
 		{children}
-	</Urgent>
+	</UrgentStyles>
 );
 
 export default UrgentMessageTag;

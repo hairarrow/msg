@@ -3,6 +3,7 @@ import StyledMessage from "./MessageStyles";
 import UrgentMessageTag from "./UrgentMessageTag";
 import { LocalizationContext } from "../../context/LocalizationContext";
 import { AddReactionIcon } from "../Icon";
+import UserProfileThumbnail from "../UserProfileThumbnail";
 
 export interface IMessageProps {
 	id: string;
@@ -22,28 +23,30 @@ const Message: FC<IMessageProps> = ({
 	seenByImageUrls,
 	isLatestMessage
 }) => {
+	const currentUserSrc = "https://i.imgur.com/4VbAo78.jpg";
 	const { localized } = useContext(LocalizationContext);
+	const isCurrentUser = currentUserSrc === senderImageUrl;
 	return (
 		<StyledMessage
-			isSenderMe={isSenderMe}
+			isSenderMe={isCurrentUser}
 			isLatestMessage={isLatestMessage}
 			urgent={urgent}
 		>
 			<section className="message-row">
-				{urgent && (
-					<UrgentMessageTag>{localized?.urgent}</UrgentMessageTag>
+				{!isCurrentUser && (
+					<UserProfileThumbnail profileSrc={senderImageUrl} />
 				)}
-				<span className="message-sender-image-container">
-					<img
-						className="message-sender-image"
-						src={senderImageUrl}
-						alt={"Someone's Name"}
-					/>
-				</span>
-				<p className="message-content">{content}</p>
-				<button type="button">
-					<AddReactionIcon />
-				</button>
+				<p className="message-content">
+					{urgent && (
+						<UrgentMessageTag>{localized?.urgent}</UrgentMessageTag>
+					)}
+					{content}
+				</p>
+				{!isCurrentUser && (
+					<button type="button" className="message-reaction-action">
+						<AddReactionIcon />
+					</button>
+				)}
 			</section>
 			{isLatestMessage ? (
 				<ul className="message-seen-by-collection">
@@ -52,10 +55,10 @@ const Message: FC<IMessageProps> = ({
 							key={src}
 							className="message-seen-by-image-container"
 						>
-							<img
-								className="message-seen-by-image"
-								src={src}
-								alt={"Someone Name"}
+							<UserProfileThumbnail
+								profileSrc={src}
+								width={16}
+								height={16}
 							/>
 						</li>
 					))}

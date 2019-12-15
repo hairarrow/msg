@@ -65,6 +65,7 @@ export default function useConversation(
 
 	useEffect(() => {
 		getMessages();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id]);
 
 	return { loading, messages };

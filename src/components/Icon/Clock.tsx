@@ -1,8 +1,8 @@
 import React, { FC, SVGProps } from "react";
 
 const SVG: FC<SVGProps<SVGSVGElement>> = ({
-	width = "16",
-	height = "16",
+	width = "24",
+	height = "24",
 	className
 }) => (
 	<svg

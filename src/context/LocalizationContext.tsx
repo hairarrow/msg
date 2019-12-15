@@ -1,7 +1,5 @@
 import React, { createContext, FC, useState, useMemo } from "react";
-import useLocalization, {
-	ILocalizationResponse
-} from "../hooks/useLocalization";
+import useLocalization from "../hooks/useLocalization";
 
 export interface ILocalizationContext {
 	lang: "en" | "es";
