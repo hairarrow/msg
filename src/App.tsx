@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { ThemeProvider } from "styled-components";
+import { theme, styled } from "./theme";
+import Conversation from "./components/Conversation";
+import { LocalizationContextProvider } from "./context/LocalizationContext";
+
+const Container = styled.div`
+	min-width: 100vw;
+	min-height: 100vh;
+	color: #000;
+`;
 
 const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+	return (
+		<LocalizationContextProvider>
+			<ThemeProvider theme={theme}>
+				<Container>
+					<Conversation id="0" />
+				</Container>
+			</ThemeProvider>
+		</LocalizationContextProvider>
+	);
+};
 
 export default App;
