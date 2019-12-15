@@ -7,7 +7,11 @@ import { LocalizationContextProvider } from "./context/LocalizationContext";
 const Container = styled.div`
 	min-width: 100vw;
 	min-height: 100vh;
-	color: #000;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: #000;
 `;
 
 const App: React.FC = () => {
